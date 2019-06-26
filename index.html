@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./main.css" />
+        <script src="index.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <title id="title">GDP Chart</title>
+    </head>
+    <body>
+        <h1>United States GDP</h1>
+        <div id="chart"></div>
+
+
+
+
+
+        <script>
+            d3.json('GDP-data.json', (data) => {
+
+                const dataset = data.data;
+                const w = 600;
+                const h = 400;
+
+                const canvas = d3.select("#chart");
+                const svg = canvas.append("svg")
+                                .attr("width", w)
+                                .attr("height", h);
+
+                svg.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => i * 6)
+                .attr("y", (d, i) => d)
+                .attr("width", 5)
+                .attr("height", 100)
+                .text("fart")
+
+            }); 
+            
+            
+        
+        </script>
+    </body>
+</html>

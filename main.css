@@ -1,3 +1,41 @@
-h1 {
-    color:blue
+* {
+    margin: 0;
+    padding: 0;
 }
+
+h1 {
+    color:rgb(71, 71, 194);
+		text-align: center;
+		
+}
+
+#chart {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 800px;
+	margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    
+    
+}
+
+svg {
+    padding: 20px;
+    border: 1px solid black;
+}
+.bar {
+    fill: rgb(4, 117, 161);
+    transition: fill .01s;
+}
+
+.bar:hover {
+    fill: rgb(255, 182, 245);
+	transition: fill 0s
+		
+}
+

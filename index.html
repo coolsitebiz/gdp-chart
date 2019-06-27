@@ -32,13 +32,13 @@
                 .data(dataset)
                 .enter()
                 .append("rect")
-                .attr("x", (d, i) => i * 2.7)
+                .attr("x", (d, i) => i * 2.65)
                 .attr("y", (d, i) => h - .021 * d[1])
                 .attr("width", 2.2)
                 .attr("height", (d, i) => d[1])
                 .attr("class", "bar")
                 .append("title")
-                .text(d => d[1])
+                .text(d => d[0] + ", $" + d[1])
 
             }); 
             

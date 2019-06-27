@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -34,8 +35,14 @@ svg {
 }
 
 .bar:hover {
-    fill: rgb(255, 182, 245);
+    fill: white;
 	transition: fill 0s
 		
+}
+
+#tooltip {
+    height: 10;
+    width: 10;
+    background: black;
 }
 

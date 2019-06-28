@@ -28,14 +28,16 @@ h1 {
 svg {
     padding: 20px;
     border: 1px solid black;
+    background: #eee;
+    
 }
 .bar {
-    fill: rgb(4, 117, 161);
+    fill: rgb(0, 103, 238);
     transition: fill .01s;
 }
 
 .bar:hover {
-    fill: white;
+    fill: #eee;
 	transition: fill 0s
 		
 }

@@ -9,11 +9,6 @@
         <h1>United States GDP</h1>
         <div id="chart"></div>
         
-
-
-
-
-
         <script>
             d3.json('GDP-data.json', (data) => {
 
@@ -21,6 +16,10 @@
                 const w = 600;
                 const h = 400;
                 const padding = 25;
+
+                const tooltip = d3.select("body")
+                                .append("div")
+                                .attr("id", "tooltip");
 
                 const xScale = d3.scaleLinear()
                                 .domain([0, dataset.length])
@@ -45,15 +44,25 @@
                 .attr("x", (d, i) => xScale(i))
                 .attr("y", (d) => h - yScale(d[1]))
                 .attr("width", 2.5)
-                .attr("height", (d) => d[1])
+                .attr("height", (d) => yScale(d[1]))
                 .attr("class", "bar")
-                .append("title")
-                .text((d, i) => d[0] + ", $" + d[1]);
+                .attr("data-date", (d) => d[0])
+                .attr("data-gdp", (d) => d[1])
+                .on("mouseover", (d, i) => {
+                    d3.select("#tooltip")
+                    .style("opacity", ".8")
+                    .attr("data-date", d[0])
+                    .style("top", h * .9)
+                    .style("left", (d3.event.pageX) + "px")
+                    .html("<p class='tooltiptext'>" + d[0] + "<br /> $" + d[1] + "B</p>" )
+                })
+                .on("mouseout", (d, i) => {
+                    d3.select("#tooltip").style("opacity", "0")
+                })
                
             }); 
             
-            
-        
+             
         </script>
         <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     </body>

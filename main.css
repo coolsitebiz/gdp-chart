@@ -2,13 +2,21 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */  
 }
 
 h1 {
-    color:rgb(71, 71, 194);
+    color:#eee;
     text-align: center;
     margin: 15px;
 		
+}
+
+body {
+    background: #555;
 }
 
 #chart {
@@ -28,19 +36,19 @@ h1 {
 svg {
     padding: 20px;
     box-shadow: 0px 3px 5px;
-    background: #ddd;
+    background: #eee;
     border-radius: 4px;
     
 }
 .bar {
-    fill: rgb(83, 148, 231);
-    transition: fill .01s;
+    fill: seagreen;
+    transition: fill .1s;
     
 }
 
 .bar:hover {
-    fill: #eee;
-	transition: fill 0s
+    fill: yellow;
+	transition: fill .0s
 		
 }
 
@@ -58,5 +66,6 @@ svg {
 .tooltiptext {
     padding:5px;
     color: white;
+    text-align: center;
 }
 

@@ -13,43 +13,55 @@
             d3.json('GDP-data.json', (data) => {
 
                 const dataset = data.data;
-                const w = 600;
+                const w = 800;
                 const h = 400;
-                const padding = 25;
+                const padding = 40;
+                const canvas = d3.select("#chart");
 
                 const tooltip = d3.select("body")
                                 .append("div")
                                 .attr("id", "tooltip");
 
-                const xScale = d3.scaleLinear()
-                                .domain([0, dataset.length])
-                                .range([padding, w]);
-
                 const yScale = d3.scaleLinear()
                                 .domain([0, d3.max(dataset, (d) => d[1])])
-                                .range([padding, h - padding]);
+                                .range([h, padding]);
 
-                const canvas = d3.select("#chart");
+                var dateArray = dataset.map((item) => new Date(item[0]));
 
-                const axis = d3.axisBottom(xScale);
+                var maxDate = new Date(d3.max(dateArray));
+                    maxDate.setMonth(maxDate.getMonth());
 
-                const svg = canvas.append("svg")
-                                .attr("width", w + 25)
-                                .attr("height", h + 25)
-                                .append("g")
-                                .attr("transform", "translate(0, 0)")
-                                .call(axis);
-        
+                var xScale = d3.scaleTime()
+                        .domain([d3.min(dateArray), maxDate])
+                        .range([padding, w]);
+            
+                const xAxis = d3.axisBottom(xScale);
+                const yAxis = d3.axisLeft(yScale);
+                const svg = canvas.append("svg");                        
                 const bars = svg.selectAll("rect");
+
+                svg 
+                .attr("width", w + padding)
+                .attr("height", h + padding)
+                .append("g")
+                .attr("id", "x-axis")
+                .attr("transform", "translate(0, 400)")
+                .call(xAxis);
+
+                svg
+                .append("g")
+                .attr("id", "y-axis")
+                .attr("transform", "translate(" + padding + ", 0)")
+                .call(yAxis);
 
                 bars
                 .data(dataset)
                 .enter()
                 .append("rect")
-                .attr("x", (d, i) => xScale(i))
-                .attr("y", (d) => h - yScale(d[1]))
-                .attr("width", 2.5)
-                .attr("height", (d) => yScale(d[1]))
+                .attr("x", (d, i) => xScale(dateArray[i]))
+                .attr("y", (d) => yScale(d[1]))
+                .attr("width", 2.8)
+                .attr("height", (d) => h - yScale(d[1]))
                 .attr("class", "bar")
                 .attr("data-date", (d) => d[0])
                 .attr("data-gdp", (d) => d[1])
@@ -58,13 +70,14 @@
                     .style("opacity", ".8")
                     .attr("data-date", d[0])
                     .style("top", h * .9)
-                    .style("left", (d3.event.pageX) + "px")
+                    .style("left", (d3.event.pageX + 20) + "px")
                     .html("<p class='tooltiptext'>" + d[0] + "<br /> $" + d[1] + "B</p>" )
                 })
                 .on("mouseout", (d, i) => {
                     d3.select("#tooltip").style("opacity", "0")
                 })
                
+
             }); 
             
              

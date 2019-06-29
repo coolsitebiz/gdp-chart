@@ -23,17 +23,22 @@
 
                 const xScale = d3.scaleLinear()
                                 .domain([0, dataset.length])
-                                .range([0, w]);
+                                .range([padding, w]);
 
                 const yScale = d3.scaleLinear()
                                 .domain([0, d3.max(dataset, (d) => d[1])])
-                                .range([padding, h]);
+                                .range([padding, h - padding]);
 
                 const canvas = d3.select("#chart");
 
+                const axis = d3.axisBottom(xScale);
+
                 const svg = canvas.append("svg")
-                                .attr("width", w)
-                                .attr("height", h);
+                                .attr("width", w + 25)
+                                .attr("height", h + 25)
+                                .append("g")
+                                .attr("transform", "translate(0, 0)")
+                                .call(axis);
         
                 const bars = svg.selectAll("rect");
 
